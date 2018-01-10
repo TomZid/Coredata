@@ -10,11 +10,14 @@
 #import "CoredataManager.h"
 #import "Student.h"
 
+typedef void (^ALERTHANDLE)(BOOL);
+
 @interface InfoViewController ()
 @property (nonatomic, strong) NSArray *datasource_name;
 @property (nonatomic, strong) NSArray *datasource_age;
 @property (weak, nonatomic) IBOutlet UIPickerView *picker;
 
+@property (nonatomic, copy) ALERTHANDLE alertHandle;
 @end
 
 @implementation InfoViewController
@@ -23,15 +26,32 @@
     [super viewDidLoad];
     self.datasource_age = [@[@(arc4random() % 60), @(arc4random() % 60), @(arc4random() % 60), @(arc4random() % 60), @(arc4random() % 60)] copy];
     self.datasource_name = @[@"Bjarne Lundgren", @"Sam Davies", @"Casa Taloyum", @"Yaoyuan", @"Mattt"];
+
+    __weak typeof(self) ws = self;
+    self.alertHandle = ^(BOOL res) {
+        UIAlertController *alert = [[UIAlertController alloc] init];
+        if (res) {
+            [alert addAction:[UIAlertAction actionWithTitle:@"🎉SUCCESS" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }]];
+            [ws presentViewController:alert animated:YES completion:nil];
+        }else {
+            [alert addAction:[UIAlertAction actionWithTitle:@"⚠️ERROR" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }]];
+            [ws presentViewController:alert animated:YES completion:nil];
+        }
+    };
 }
 
+// COREDATA CREATE
 - (IBAction)saveClicked:(id)sender {
     NSInteger index = [self.picker selectedRowInComponent:0];
     NSString *name = self.datasource_name[index];
     NSNumber *age = self.datasource_age[index];
     NSInteger identity = arc4random() % 10;
 
-    Student *s = [NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:[[CoredataManager share] context]];
+    Student *s = [NSEntityDescription insertNewObjectForEntityForName:K_ENTITY_STUDENT inManagedObjectContext:[[CoredataManager share] context]];
     s.studentName = name;
     s.studentAge = [age integerValue];
     s.studentId = identity;
@@ -40,8 +60,10 @@
     BOOL res = [[[CoredataManager share] context] save:&error];
     if (res) {
         NSLog(@"Save successFull");
+        self.alertHandle(YES);
     } else {
         NSLog(@"Error: %@,%@",error,[error userInfo]);
+        self.alertHandle(NO);
     }
 }
 

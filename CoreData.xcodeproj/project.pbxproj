@@ -37,6 +37,8 @@
 		F728C926200457E700EC3B3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F728C928200457E700EC3B3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F728C929200457E700EC3B3D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F76154D72005B73F00AA847E /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
+		F76154D82005B77A00AA847E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,8 @@
 				F728C920200457E700EC3B3D /* CoreData.xcdatamodeld */,
 				F710C3E62004D6B9004E1301 /* Student.h */,
 				F710C3E72004D6B9004E1301 /* Student.m */,
+				F76154D72005B73F00AA847E /* Macro.h */,
+				F76154D82005B77A00AA847E /* PrefixHeader.pch */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -301,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CoreData/PrefixHeader.pch";
 				INFOPLIST_FILE = CoreData/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TZ.CoreData;
@@ -314,6 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CoreData/PrefixHeader.pch";
 				INFOPLIST_FILE = CoreData/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TZ.CoreData;

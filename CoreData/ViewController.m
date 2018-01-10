@@ -24,11 +24,7 @@
     [self requestData];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
+// COREDATA RETRIEVE
 - (void)requestData {
     NSFetchRequest *request = NSFetchRequest.new;
     NSEntityDescription *e = [NSEntityDescription entityForName:@"Student" inManagedObjectContext:[CoredataManager share].context];
@@ -55,6 +51,73 @@
     Student *s = self.datasource[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"ID:%d-age:%d-name:%@", s.studentId, s.studentAge, s.studentName];
     return cell;
+}
+
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) {
+    // COREDATA UPDATE
+    void (^updateHandle)(NSIndexPath*) = ^(NSIndexPath *indexPath) {
+        Student *s = self.datasource[indexPath.row];
+        s.studentAge = arc4random() % 50;
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+        NSError *error;
+        BOOL res = [[CoredataManager share].context save:&error];
+        if (res) {
+            NSLog(@"⚽️⚽️Update successFull⚽️⚽️");
+        } else {
+            NSLog(@"⚠️⚠️Error: %@,%@⚠️⚠️",error,[error userInfo]);
+        }
+    };
+
+    if (@available(iOS 11, *)) {
+        UIContextualAction *action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"UPDATE AGE" handler:^(UIContextualAction * _Nonnull action,
+                                                                                                                  __kindof UIView * _Nonnull sourceView,
+                                                                                                                  void (^ _Nonnull completionHandler)(BOOL)) {
+            if (completionHandler) {
+                completionHandler(YES);
+                updateHandle(indexPath);
+            }
+        }];
+        action.backgroundColor = [UIColor purpleColor];
+        return [UISwipeActionsConfiguration configurationWithActions:@[
+                                                                       action
+                                                                       ]];
+    }
+    return nil;
+}
+
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) {
+    // COREDATA DELETE
+    void (^deleteHandle)(NSIndexPath*) = ^(NSIndexPath *indexPath) {
+        Student *s = self.datasource[indexPath.row];
+        [[CoredataManager share].context deleteObject:s];
+
+        NSError *error;
+        BOOL res = [[CoredataManager share].context save:&error];
+        if (res) {
+            NSLog(@"⚽️⚽️delete successFull⚽️⚽️");
+
+            [self.datasource removeObject:s];
+            [tableView reloadData];
+
+        }else {
+            NSLog(@"⚠️⚠️Error: %@,%@⚠️⚠️",error,[error userInfo]);
+        }
+    };
+
+    if (@available(iOS 11, *)) {
+        return [UISwipeActionsConfiguration configurationWithActions:@[
+                                                                       [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"delete" handler:^(UIContextualAction * _Nonnull action,
+                                                                                                                                                                                  __kindof UIView * _Nonnull sourceView,
+                                                                                                                                                                                  void (^ _Nonnull completionHandler)(BOOL)) {
+            if (completionHandler) {
+                completionHandler(YES);
+                deleteHandle(indexPath);
+            }
+        }],
+                                                                       ]];
+    }
+    return nil;
 }
 
 @end
