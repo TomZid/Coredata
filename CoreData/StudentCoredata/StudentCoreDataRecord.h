@@ -12,6 +12,9 @@
 @interface StudentCoreDataRecord : NSObject
 + (instancetype)share;
 
+@end
+
+@interface StudentCoreDataRecord (CoreData_create)
 - (void)addStudentName:(NSString*)name age:(NSInteger)age identifier:(NSInteger)identifier;
 @end
 
@@ -21,4 +24,8 @@
 
 @interface StudentCoreDataRecord (CoreData_fetch)
 - (NSArray<Student*> *)fetchDataRecordResults;
+@end
+
+@interface StudentCoreDataRecord (CoreData_update)
+- (void)updateDataRecord:(NSArray<Student*>*)array;
 @end

@@ -33,6 +33,10 @@
     return self;
 }
 
+@end
+
+
+@implementation StudentCoreDataRecord (CoreData_create)
 - (void)addStudentName:(NSString*)name age:(NSInteger)age identifier:(NSInteger)identifier {
     if (_coreData) {
         [_coreData asyncWithBlock:^(NSManagedObjectContext * _Nonnull context) {
@@ -45,6 +49,7 @@
 }
 
 @end
+
 
 @implementation StudentCoreDataRecord (CoreData_delete)
 - (BOOL)deleteRecoreDatas:(NSArray<Student*>*)array {
@@ -76,6 +81,15 @@
 - (NSFetchRequest*)fetchRequest {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:K_ENTITUNAME];
     return request;
+}
+
+@end
+
+
+@implementation StudentCoreDataRecord (CoreData_update)
+- (void)updateDataRecord:(NSArray<Student*>*)array {
+    NSError *error = nil;
+    [self.coreData.mainQueueContext save:&error];
 }
 
 @end
