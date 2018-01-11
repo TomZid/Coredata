@@ -7,8 +7,10 @@
 //
 
 #import "InfoViewController.h"
-#import "CoredataManager.h"
+//#import "CoredataManager.h"
 #import "Student.h"
+
+#import "StudentCoreDataRecord.h"
 
 typedef void (^ALERTHANDLE)(BOOL);
 
@@ -43,7 +45,7 @@ typedef void (^ALERTHANDLE)(BOOL);
         }
     };
 }
-
+/*
 // COREDATA CREATE
 - (IBAction)saveClicked:(id)sender {
     NSInteger index = [self.picker selectedRowInComponent:0];
@@ -65,6 +67,16 @@ typedef void (^ALERTHANDLE)(BOOL);
         NSLog(@"Error: %@,%@",error,[error userInfo]);
         self.alertHandle(NO);
     }
+}
+*/
+
+- (IBAction)saveClicked:(id)sender {
+    NSInteger index = [self.picker selectedRowInComponent:0];
+    NSString *name = self.datasource_name[index];
+    NSNumber *age = self.datasource_age[index];
+    NSInteger identity = arc4random() % 10;
+
+    [[StudentCoreDataRecord share] addStudentName:name age:[age integerValue] identifier:identity];
 }
 
 #pragma mark - UIPickerViewDataSource

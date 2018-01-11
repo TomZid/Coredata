@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F710C3D3200495D1004E1301 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F728C920200457E700EC3B3D /* CoreData.xcdatamodeld */; };
 		F710C3E22004C974004E1301 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F710C3E12004C974004E1301 /* InfoViewController.m */; };
 		F710C3E52004CCDD004E1301 /* CoredataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F710C3E42004CCDD004E1301 /* CoredataManager.m */; };
 		F710C3E82004D6B9004E1301 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = F710C3E72004D6B9004E1301 /* Student.m */; };
+		F710E33B20061E8A0095D538 /* StudentCoreDataRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F710E33A20061E8A0095D538 /* StudentCoreDataRecord.m */; };
+		F710E33E200620CF0095D538 /* Student.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F710E33C200620CF0095D538 /* Student.xcdatamodeld */; };
 		F728C919200457E700EC3B3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F728C918200457E700EC3B3D /* AppDelegate.m */; };
 		F728C91C200457E700EC3B3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F728C91B200457E700EC3B3D /* ViewController.m */; };
 		F728C91F200457E700EC3B3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F728C91D200457E700EC3B3D /* Main.storyboard */; };
@@ -26,13 +27,15 @@
 		F710C3E42004CCDD004E1301 /* CoredataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoredataManager.m; sourceTree = "<group>"; };
 		F710C3E62004D6B9004E1301 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		F710C3E72004D6B9004E1301 /* Student.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		F710E33920061E8A0095D538 /* StudentCoreDataRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentCoreDataRecord.h; sourceTree = "<group>"; };
+		F710E33A20061E8A0095D538 /* StudentCoreDataRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentCoreDataRecord.m; sourceTree = "<group>"; };
+		F710E33D200620CF0095D538 /* Student.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Student.xcdatamodel; sourceTree = "<group>"; };
 		F728C914200457E700EC3B3D /* CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F728C917200457E700EC3B3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F728C918200457E700EC3B3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F728C91A200457E700EC3B3D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F728C91B200457E700EC3B3D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F728C91E200457E700EC3B3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F728C921200457E700EC3B3D /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		F728C923200457E700EC3B3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F728C926200457E700EC3B3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F728C928200457E700EC3B3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +55,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F710E33820061E260095D538 /* StudentCoredata */ = {
+			isa = PBXGroup;
+			children = (
+				F710E33920061E8A0095D538 /* StudentCoreDataRecord.h */,
+				F710E33A20061E8A0095D538 /* StudentCoreDataRecord.m */,
+				F710E33C200620CF0095D538 /* Student.xcdatamodeld */,
+			);
+			path = StudentCoredata;
+			sourceTree = "<group>";
+		};
 		F728C90B200457E700EC3B3D = {
 			isa = PBXGroup;
 			children = (
@@ -71,8 +84,8 @@
 		F728C916200457E700EC3B3D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				F710C3E32004CCDC004E1301 /* CoredataManager.h */,
-				F710C3E42004CCDD004E1301 /* CoredataManager.m */,
+				F79416AF2006FB2A002BC272 /* CoreData */,
+				F710E33820061E260095D538 /* StudentCoredata */,
 				F728C917200457E700EC3B3D /* AppDelegate.h */,
 				F728C918200457E700EC3B3D /* AppDelegate.m */,
 				F728C91A200457E700EC3B3D /* ViewController.h */,
@@ -84,11 +97,19 @@
 				F728C925200457E700EC3B3D /* LaunchScreen.storyboard */,
 				F728C928200457E700EC3B3D /* Info.plist */,
 				F728C929200457E700EC3B3D /* main.m */,
-				F728C920200457E700EC3B3D /* CoreData.xcdatamodeld */,
 				F710C3E62004D6B9004E1301 /* Student.h */,
 				F710C3E72004D6B9004E1301 /* Student.m */,
 				F76154D72005B73F00AA847E /* Macro.h */,
 				F76154D82005B77A00AA847E /* PrefixHeader.pch */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		F79416AF2006FB2A002BC272 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F710C3E32004CCDC004E1301 /* CoredataManager.h */,
+				F710C3E42004CCDD004E1301 /* CoredataManager.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -165,9 +186,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F728C91C200457E700EC3B3D /* ViewController.m in Sources */,
-				F710C3D3200495D1004E1301 /* CoreData.xcdatamodeld in Sources */,
 				F710C3E22004C974004E1301 /* InfoViewController.m in Sources */,
+				F710E33B20061E8A0095D538 /* StudentCoreDataRecord.m in Sources */,
 				F728C919200457E700EC3B3D /* AppDelegate.m in Sources */,
+				F710E33E200620CF0095D538 /* Student.xcdatamodeld in Sources */,
 				F710C3E82004D6B9004E1301 /* Student.m in Sources */,
 				F710C3E52004CCDD004E1301 /* CoredataManager.m in Sources */,
 				F728C92A200457E700EC3B3D /* main.m in Sources */,
@@ -352,13 +374,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F728C920200457E700EC3B3D /* CoreData.xcdatamodeld */ = {
+		F710E33C200620CF0095D538 /* Student.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F728C921200457E700EC3B3D /* CoreData.xcdatamodel */,
+				F710E33D200620CF0095D538 /* Student.xcdatamodel */,
 			);
-			currentVersion = F728C921200457E700EC3B3D /* CoreData.xcdatamodel */;
-			path = CoreData.xcdatamodeld;
+			currentVersion = F710E33D200620CF0095D538 /* Student.xcdatamodel */;
+			path = Student.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
