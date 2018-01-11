@@ -24,6 +24,7 @@
 
 @interface StudentCoreDataRecord (CoreData_fetch)
 - (NSArray<Student*> *)fetchDataRecordResults;
+- (void)fetchAsyncDataRecordResult:(void(^)(NSArray<Student*>* array))complete;
 @end
 
 @interface StudentCoreDataRecord (CoreData_update)

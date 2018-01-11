@@ -7,10 +7,8 @@
 //
 
 #import "InfoViewController.h"
-//#import "CoredataManager.h"
-#import "Student.h"
-
 #import "StudentCoreDataRecord.h"
+#import "Student.h"
 
 typedef void (^ALERTHANDLE)(BOOL);
 
@@ -45,30 +43,6 @@ typedef void (^ALERTHANDLE)(BOOL);
         }
     };
 }
-/*
-// COREDATA CREATE
-- (IBAction)saveClicked:(id)sender {
-    NSInteger index = [self.picker selectedRowInComponent:0];
-    NSString *name = self.datasource_name[index];
-    NSNumber *age = self.datasource_age[index];
-    NSInteger identity = arc4random() % 10;
-
-    Student *s = [NSEntityDescription insertNewObjectForEntityForName:K_ENTITY_STUDENT inManagedObjectContext:[[CoredataManager share] context]];
-    s.studentName = name;
-    s.studentAge = [age integerValue];
-    s.studentId = identity;
-
-    NSError *error = NSError.new;
-    BOOL res = [[[CoredataManager share] context] save:&error];
-    if (res) {
-        NSLog(@"Save successFull");
-        self.alertHandle(YES);
-    } else {
-        NSLog(@"Error: %@,%@",error,[error userInfo]);
-        self.alertHandle(NO);
-    }
-}
-*/
 
 - (IBAction)saveClicked:(id)sender {
     NSInteger index = [self.picker selectedRowInComponent:0];

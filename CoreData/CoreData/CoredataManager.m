@@ -87,14 +87,18 @@ static NSString *K_MANAGEDOBJECTMODELEXTENSION = @"momd";
             storeWasRecreated = YES;
             NSError *removeStoreError = nil;
             if (![[NSFileManager defaultManager] removeItemAtURL:self.persistentStoreUrl error:&removeStoreError]) {
+#ifdef DEBUG
                 NSLog(@"Error removing store file at URL '%@': %@, %@", self.persistentStoreUrl, removeStoreError, [removeStoreError userInfo]);
+#endif
             }
         }
     }
     NSError *addStoreError = nil;
     NSPersistentStore *store = [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.persistentStoreUrl options:nil error:&addStoreError];
     if (!store) {
+#ifdef DEBUG
         NSLog(@"Unable to add store: %@, %@", addStoreError, [addStoreError userInfo]);
+#endif
     }
 }
 

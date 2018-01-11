@@ -72,9 +72,28 @@
 
 @implementation StudentCoreDataRecord (CoreData_fetch)
 - (NSArray<Student*> *)fetchDataRecordResults {
+    return [self fetchDataWithContext:self.coreData.mainQueueContext];
+}
+
+- (void)fetchAsyncDataRecordResult:(void(^)(NSArray<Student*>* array))complete {
+    __weak typeof(self) ws = self;
+    [self.coreData asyncWithBlock:^(NSManagedObjectContext * _Nonnull context) {
+        NSArray *array = [ws fetchDataWithContext:context];
+        if (complete) {
+            complete(array);
+        }
+    }];
+}
+
+- (NSArray<Student*> *)fetchDataWithContext:(NSManagedObjectContext*)context {
     NSFetchRequest *request = [self fetchRequest];
-    NSError *error;
+    NSError *error = nil;
     NSArray *array = [self.coreData.mainQueueContext executeFetchRequest:request error:&error];
+    if (error) {
+#ifdef DEBUG
+        NSLog(@"⚠️⚠️ %s \n ERROR:%@ \n", __PRETTY_FUNCTION__, error);
+#endif
+    }
     return array;
 }
 

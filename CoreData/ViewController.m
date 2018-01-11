@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "StudentCoreDataRecord.h"
-#import <CoreData/CoreData.h>
 #import "Student.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -26,11 +25,12 @@
 
 // COREDATA RETRIEVE
 - (void)requestData {
-    StudentCoreDataRecord *r = [StudentCoreDataRecord share];
-    NSArray *array = [r fetchDataRecordResults];
-    self.datasource = [array mutableCopy];
-    NSLog(@"array == %@", array);
-    [self.tableView reloadData];
+    StudentCoreDataRecord *s = [StudentCoreDataRecord share];
+    __weak typeof(self) ws = self;
+    [s fetchAsyncDataRecordResult:^(NSArray<Student *> *array) {
+        ws.datasource = [array mutableCopy];
+        [ws.tableView reloadData];
+    }];
 }
 
 #pragma mark - storyboard
@@ -58,13 +58,6 @@
         s.studentAge = arc4random() % 50;
         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-//        NSError *error;
-//        BOOL res = [[CoredataManager share].context save:&error];
-//        if (res) {
-//            NSLog(@"⚽️⚽️Update successFull⚽️⚽️");
-//        } else {
-//            NSLog(@"⚠️⚠️Error: %@,%@⚠️⚠️",error,[error userInfo]);
-//        }
         [[StudentCoreDataRecord share] updateDataRecord:@[s]];
     };
 

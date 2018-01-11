@@ -84,6 +84,7 @@
 		F728C916200457E700EC3B3D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F7E66BB5200748DF00155A40 /* HttpTrace */,
 				F79416AF2006FB2A002BC272 /* CoreData */,
 				F710E33820061E260095D538 /* StudentCoredata */,
 				F728C917200457E700EC3B3D /* AppDelegate.h */,
@@ -112,6 +113,13 @@
 				F710C3E42004CCDD004E1301 /* CoredataManager.m */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		F7E66BB5200748DF00155A40 /* HttpTrace */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HttpTrace;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
