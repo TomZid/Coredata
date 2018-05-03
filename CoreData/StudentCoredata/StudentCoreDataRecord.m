@@ -53,18 +53,12 @@
 
 @implementation StudentCoreDataRecord (CoreData_delete)
 - (BOOL)deleteRecoreDatas:(NSArray<Student*>*)array {
-    [array enumerateObjectsUsingBlock:^(Student * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self.coreData.mainQueueContext deleteObject:obj];
+    [self.coreData syncWithBlock:^(NSManagedObjectContext * _Nonnull context) {
+        [array enumerateObjectsUsingBlock:^(Student * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [context deleteObject:obj];
+        }];
     }];
-
-    NSError *error;
-    BOOL res = [self.coreData.mainQueueContext save:&error];
-    if (!res) {
-#ifdef DEBUG
-        NSLog(@"⚠️⚠️%s \n Error saving context: %@ %@ %@ \n⚠️⚠️", __PRETTY_FUNCTION__, self, error, [error userInfo]);
-#endif
-    }
-    return res;
+    return true;
 }
 
 @end

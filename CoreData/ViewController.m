@@ -11,6 +11,9 @@
 #import "Student.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+{
+    UIRefreshControl *_refresh;
+}
 @property (nonatomic, strong) NSMutableArray *datasource;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -18,9 +21,22 @@
 
 @implementation ViewController
 #pragma mark - UI
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self configUI];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self requestData];
+}
+
+- (void)configUI {
+    _refresh = UIRefreshControl.new;
+    [_refresh setTintColor:[UIColor orangeColor]];
+    [_refresh setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Release🎉"]];
+    [_refresh addTarget:self action:@selector(refreshAction) forControlEvents:UIControlEventValueChanged];
+    self.tableView.refreshControl = _refresh;
 }
 
 // COREDATA RETRIEVE
@@ -28,9 +44,15 @@
     StudentCoreDataRecord *s = [StudentCoreDataRecord share];
     __weak typeof(self) ws = self;
     [s fetchAsyncDataRecordResult:^(NSArray<Student *> *array) {
-        ws.datasource = [array mutableCopy];
-        [ws.tableView reloadData];
+        __strong typeof(ws) ss = ws;
+        ss.datasource = [array mutableCopy];
+        [ss.tableView reloadData];
+        [ss->_refresh endRefreshing];
     }];
+}
+
+- (void)refreshAction  {
+    [self requestData];
 }
 
 #pragma mark - storyboard
@@ -49,6 +71,10 @@
     Student *s = self.datasource[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"ID:%d-age:%d-name:%@", s.studentId, s.studentAge, s.studentName];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
 - (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) {

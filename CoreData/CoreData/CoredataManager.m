@@ -1,7 +1,7 @@
 //
 //  CoredataManager.m
 //  CoreData
-//
+//  https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreData/Concurrency.html#//apple_ref/doc/uid/TP40001075-CH24-SW3
 //  Created by tom on 09/01/2018.
 //  Copyright © 2018 TZ. All rights reserved.
 //
@@ -68,6 +68,7 @@ static NSString *K_MANAGEDOBJECTMODELEXTENSION = @"momd";
 }
 
 - (void)configContext {
+    //The paramter being passed in as part of the initialization determines the type of XXX is returned.
     _masterContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     _masterContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
     _masterContext.persistentStoreCoordinator = self.persistentStoreCoordinator;

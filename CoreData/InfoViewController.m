@@ -51,6 +51,13 @@ typedef void (^ALERTHANDLE)(BOOL);
     NSInteger identity = arc4random() % 10;
 
     [[StudentCoreDataRecord share] addStudentName:name age:[age integerValue] identifier:identity];
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"🎉SUCCESS🎉" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
 }
 
 #pragma mark - UIPickerViewDataSource
