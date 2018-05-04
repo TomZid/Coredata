@@ -1,0 +1,7 @@
+# SELF PROJECT TO LEARN COREDATA
+FUNCTION LIST
+* ADD
+* DELETE
+* UPDATE
+* QUERY
+![](https://image.ibb.co/iUUaES/cd.gif)
